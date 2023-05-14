@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Detail Tiket</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+
+<div class="container">
+    <div class="card m-4 p-4">
+        <div class="card-body">
+            <div class="justify-content-center">
+
+                <h2><p class="font-weight-bold">Detail Tiket</p></h2>
+                <br><br>
+                <p th:text="'Nama Konser        : ' + ${tiket.konser.namaKonser}"></p>
+                <p th:text="'Waktu              : ' + ${#temporals.format(tiket.konser.waktu, 'dd-MM-yyyy HH:mm')}"></p>
+                <p th:text="'Tempat             : ' + ${tiket.konser.tempat}"></p>
+                <p th:text="'Atas Nama          : ' + ${tiket.namaLengkap}"></p>
+                <p th:text="'Email              : ' + ${tiket.email}"></p>
+                <p th:text="'Tanggal Pembelian  : ' + ${#temporals.format(tiket.tanggalPembelian, 'dd-MM-yyyy HH:mm')}"></p>
+                <p th:text="'Tipe Tiket         : ' + ${tiket.tipe.nama}"></p>
+                <br><br>
+                <a class="btn btn-primary" href="/tiket">Kembali</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>

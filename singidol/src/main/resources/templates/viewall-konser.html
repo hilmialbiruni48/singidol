@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Daftar Konser</title>
+  <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+  <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+
+<div class="container">
+  <div class="card m-4 p-4">
+    <div class="card-body">
+      <div class="justify-content-center">
+        <h2><p class="font-weight-bold">Daftar Konser</p></h2>
+        <br>
+        <a th:href="@{/konser/cari}" class="mx-2 btn btn-primary">Filter </a>
+        <a th:href="@{/konser/tambah}" class="mx-2 btn btn-primary">+ Tambah Konser</a>
+        <br>
+        <br>
+
+        <div th:if = "*{listKonser.size() != 0}">
+          <table class="table">
+            <thead>
+            <tr>
+              <th>No</th>
+              <th>Konser</th>
+              <th>Pendapatan</th>
+              <th>Detail Konser</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="konser, iterationStatus : ${listKonser}"
+                th:style="${iterationStatus.even} ? 'font-weight:bold;'">
+              <td th:text="${iterationStatus.count}"></td>
+              <td th:text="${konser.namaKonser}"></td>
+              <td th:text="${konser.totalPendapatan}"></td>
+              <td>
+                <a class="btn btn-primary text-white border-white" th:href="@{/konser/} + ${konser.idKonser}" style="background-color: #03a9f4">Detail</a>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <br>
+        <div th:unless = "*{listKonser.size() != 0}">
+          <h2 th:text = "'Tidak ada Konser'"></h2>
+        </div>
+
+        <a class="btn btn-primary" href="/">Home</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

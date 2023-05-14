@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Pesan Tiket</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+
+<div class="container">
+    <div class="card m-4 p-4">
+        <div class="card-body">
+            <div class="justify-content-center">
+
+                <h2><p class="font-weight-bold">Beli Tiket</p></h2>
+                <br>
+                <form th:action="@{/tiket/pesan}" th:object="${tiket}" method="POST">
+                    Konser : <br>
+                    <select class="form-control" name="konser" th:field="*{konser.idKonser}">
+                        <option th:each="konser : ${listKonser}"
+                                th:value="${konser.idKonser}"
+                                th:text="${konser.namaKonser}"></option>
+                    </select>
+                    <br><br>
+                    Nama Pemesan : <br>
+                    <input class="form-control" type="text" th:field="*{namaLengkap}"/>
+                    <br><br>
+                    Tanggal Lahir : <br>
+                    <input required class="form-control" type="datetime-local" th:field="*{tanggalLahir}" />
+                    <br><br>
+                    Email : <br>
+                    <input class="form-control" type="email" th:field="*{email}"/>
+                    <br><br>
+                    Tipe Tiket : <br>
+                    <select class="form-control" name="tipe" th:field="*{tipe.idTipe}">
+                        <option th:each="tipeEx : ${listTipe}"
+                                th:value="${tipeEx.idTipe}"
+                                th:text="${tipeEx.nama}"></option>
+                    </select>
+                    <br><br>
+                    <button class="btn btn-success" type="submit" name="save">Pesan</button>
+                    <a class="btn btn-secondary" href="/tiket">Batal</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

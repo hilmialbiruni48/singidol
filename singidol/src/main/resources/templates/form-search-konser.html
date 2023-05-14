@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+  <title>Search Konser</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+  <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+  <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="container">
+  <div class="card m-4 p-4">
+    <div class="card-body">
+      <div class="justify-content-center">
+
+        <h2><p class="font-weight-bold">Cari Konser</p></h2>
+        <br>
+        <form th:action="@{/konser/cari}" method="GET">
+
+          Pendapatan Minimal <br>
+          <input class="form-control" type="number" name="totalPendapatan"/>
+          <br><br>
+
+          Idol
+          <select name="idIdol" class="form-control">
+            <div th:each="idolEx, iterationStatus2 : ${listIdolExisting} ">
+              <option th:value="${idolEx.idIdol}" th:text="${idolEx.namaIdol}"></option>
+            </div>
+          </select>
+          <br><br>
+
+          <button class="btn btn-primary" type="submit", name = "search">Cari</button>
+          <a class="btn btn-secondary" href="/">Batal</a>
+        </form>
+        <div th:if="${listKonser.size() != 0}">
+          <table class="table">
+            <thead>
+            <tr>
+              <th>No</th>
+              <th>Konser</th>
+              <th>Pendapatan</th>
+              <th>Detail Konser</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="konser, iterationStatus: ${listKonser}"
+                th:style="${iterationStatus.even} ? 'font-weight:bold;'">
+              <td th:text="${iterationStatus.count}"></td>
+              <td th:text="${konser.namaKonser}"></td>
+              <td th:text="${konser.totalPendapatan}"></td>
+              <td class="d-flex justify-content-center">
+                <a class="mx-2 btn btn-primary" th:href="@{/konser/} + ${konser.idKonser}">Detail</a>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

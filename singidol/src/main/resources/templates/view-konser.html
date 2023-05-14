@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Detail Konser</title>
+  <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+  <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+
+<div class="container">
+  <div class="card m-4 p-4">
+    <div class="card-body">
+      <div class="justify-content-center">
+
+        <h2><p class="font-weight-bold">Detail Konser</p></h2>
+        <a class="btn btn-primary" th:href="@{/konser/ubah/} + ${konser.idKonser}">Ubah Konser</a>
+        <br><br>
+        <p th:text="'Nama Konser: ' + ${konser.namaKonser}"></p>
+        <p th:text="'Waktu: ' + ${konser.waktu}"></p>
+        <p th:text="'Tempat: ' + ${konser.tempat}"></p>
+        <p th:text="'Pendapatan: ' + ${konser.totalPendapatan}"></p>
+        <br><br>
+        <div>
+          <h2>Jadwal tampil idol</h2>
+<!--          <br><br>-->
+          <table class="table">
+            <thead>
+            <tr>
+              <th>Jam</th>
+              <th>Idol</th>
+              <th>Detail Idol</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr
+                    th:each="penampilan, iterationStatus: ${listPenampilan}"
+                    th:style="${iterationStatus.even} ? 'font-weight:bold;'"
+            >
+              <td th:text="${penampilan.jamMulaiTampil}"></td>
+              <td th:text="${penampilan.idol.namaIdol}"></td>
+              <td>
+                <a class="btn btn-sm btn-primary text-white border-white" style="background-color: #0f6674"
+                   th:href="@{/idol/} + ${penampilan.idol.idIdol}">Detail</a>
+              </td>
+          </table>
+        </div>
+        <br><br>
+        <a class="btn btn-primary" href="/konser">kembali</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+
+</html>

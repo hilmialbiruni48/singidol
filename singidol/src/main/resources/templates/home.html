@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Welcome To Singidol</title>
+  <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+  <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+
+<div class="d-flex justify-content-center">
+  <div class="m-4">
+    <div style="margin-top: 25%;">
+        <h2 style="background-color: #0275D8; border-radius: 10px; padding-left: 100px; padding-right: 100px; padding-top: 50px; padding-bottom: 50px; margin-bottom: 50px; color: white" >WELCOME TO SINGIDOL</h2>
+      <div class="d-flex justify-content-center">
+        <h4 style="margin-bottom: 50px">List of Features:</h4>
+      </div>
+      <div style="text-align: center;">
+        <a th:href="@{/konser}" class="mx-3 btn btn-primary">Konser</a>
+        <a th:href="@{/tiket}" class="mx-3 btn btn-primary">Tiket</a>
+        <a th:href="@{/idol}" class="mx-3 btn btn-primary">Idol</a>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+
+</html>

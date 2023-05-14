@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Detail Idol</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+
+<div class="container">
+    <div class="card m-4 p-4">
+        <div class="card-body">
+            <div class="justify-content-center">
+
+                <h2><p class="font-weight-bold">Detail Idol</p></h2>
+                <br><br>
+                <p th:text="'Nama Idol      : ' + ${idol.namaIdol}"></p>
+                <p th:text="'Asal Negara    : ' + ${idol.asalNegara}"></p>
+                <p th:text="'Jumlah Anggota : ' + ${idol.jumlahAnggota}"></p>
+                <p th:text="'Tanggal Debut  : ' + ${idol.tanggalDebut}"></p>
+                <br><br>
+                <a class="btn btn-primary" href="/idol">Kembali</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>

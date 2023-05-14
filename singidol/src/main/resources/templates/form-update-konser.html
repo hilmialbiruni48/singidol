@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Form Update Konser</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+
+<div class="container">
+    <div class="card m-4 p-4">
+        <div class="card-body">
+            <div class="justify-content-center">
+                <h2><p class="font-weight-bold">Update Konser</p></h2>
+                <br>
+                <form th:action="@{/konser/ubah}" th:object="${konser}" method="POST">
+                    <input type="hidden" th:field="*{totalPendapatan}" />
+                    <input type="hidden" th:field="*{idKonser}" />
+
+                    Nama Konser : <br>
+                    <input class="form-control" type="text" th:field="*{namaKonser}"/>
+                    <br><br>
+                    Waktu : <br>
+                    <input required class="form-control" type="datetime-local" th:field="*{waktu}" />
+                    <br><br>
+                    Tempat : <br>
+                    <input class="form-control" type="text" th:field="*{tempat}"/>
+                    <br><br>
+
+                    <table class="table">
+                        <thead>
+                        <th>Daftar Idol</th>
+                        <th>
+                            <button class="btn btn-primary" type="submit" name="addRow">+ Tambah Idol</button>
+                        </th>
+                        </thead>
+                        <tbody>
+                        <tr th:each="idol, iterationStatus: *{listPenampilan}">
+
+<!--                        <tr th:each="penampilan, iterationStatus : *{listPenampilan}">-->
+                            <td>
+                                <select th:field="*{listPenampilan[__${iterationStatus.index}__].idol}"
+                                        class="form-control">
+                                    <option  th:each="idolEx, iterationStatus2 : ${listIdolExisting}"
+                                             th:value="${idolEx.idIdol}" th:text="${idolEx.namaIdol}"></option>
+
+                                    <!--                                    <div th:each="idolEx, iterationStatus2 : ${listIdolExisting}">-->
+<!--                                        <option th:value="${idolEx.idIdol}" th:text="${idolEx.namaIdol}"></option>-->
+<!--                                    </div>-->
+                                </select>
+                            </td>
+                            <td>
+                                <input class="form-control" type="time" th:field="*{listPenampilan[__${iterationStatus.index}__].jamMulaiTampil}">
+                            </td>
+                            <td>
+                                <button th:value="${iterationStatus.index}" class="btn btn-danger" type="submit"
+                                        name="deleteRow">Hapus</button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <button class="btn btn-primary" type="submit" name="save">Submit</button>
+                    <a class="btn btn-primary" href="/konser">Kembali</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

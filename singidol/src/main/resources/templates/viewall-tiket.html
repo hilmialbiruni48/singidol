@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Daftar Tiket</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+
+<div class="container">
+    <div class="card m-4 p-4">
+        <div class="card-body">
+            <div class="justify-content-center">
+                <h2><p class="font-weight-bold">Daftar Tiket</p></h2>
+                <br>
+                <a th:href="@{/tiket/pesan}" class="mx-2 btn btn-primary">+ Beli Tiket</a>
+                <br>
+                <br>
+
+                <div th:if = "*{listTiket.size() != 0}">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>No Tiket</th>
+                            <th>Konser</th>
+                            <th>Tipe Tiket</th>
+                            <th>Aksi</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="tiket, iterationStatus : ${listTiket}"
+                            th:style="${iterationStatus.even} ? 'font-weight:bold;'">
+                            <td th:text="${iterationStatus.count}"></td>
+                            <td th:text="${tiket.nomorTiket}"></td>
+                            <td th:text="${tiket.konser.namaKonser}"></td>
+                            <td th:text="${tiket.tipe.deskripsiTipe}"></td>
+                            <td class="d-flex justify-content-center">
+                                    <a class="btn btn-primary text-white border-white" style="background-color: #03a9f4" th:href="@{/tiket/} + ${tiket.idTiket} ">Detail</a>
+                                    <a class="btn btn-danger" th:href="@{/tiket/hapus/} + ${tiket.idTiket}">Hapus</a>
+
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <br>
+                <div th:unless = "*{listTiket.size() != 0}">
+                    <h2 th:text = "'Tidak ada Konser'"></h2>
+                </div>
+
+                <a class="btn btn-primary" href="/">Home</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
